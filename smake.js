@@ -110,7 +110,7 @@ Game = (function(_super) {
     } 
     if(this.score >= 5 && this.score < 10 && color !== "#000" && color !== "#000"){
       this.togglePause(true, "This is the alpha stage. Most players go past this boundary. You should too.")
-      alert('press ⌃+⇧+i (windows) or ⌘+⌥+i (mac)')
+      alert('press ctrl+shift+i (windows) or cmd+opt+i (mac)')
       color = "#000"
     }
     if(this.score >= 10 && this.score < 20 && color !== "#007aff"){
