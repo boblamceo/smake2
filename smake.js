@@ -5,7 +5,8 @@ var Game, game,
 var color = '#FFF'
 var moosic = new Audio('music.mp3');
 var ding = new Audio('ding.mp3')
-
+var e = document.createElement('img');
+e.src = "head.png"
 function invertColor(hex) {
   if (hex.indexOf('#') === 0) {
       hex = hex.slice(1);
@@ -133,7 +134,8 @@ Game = (function(_super) {
     }
     if(this.score >= 50 && this.score < 75 && color !== "#FF0000"){
       this.togglePause(true, `u HaCKeR???? Ur literally advanced now. Only have ${100-this.score} to go!`)
-
+      e.src = "prohead.png"
+      console.log(e.src)
       color = "#FF0000";
     }
     if(this.score >= 75 && this.score < 100 && color !== "#CC8899"){
@@ -162,10 +164,15 @@ Game = (function(_super) {
     i = 0;
     l = this.snake.length;
     _results = [];
-    while (i < l) {
+    var width = this.pixelsize
+    x = this.snake[i][0];
+    y = this.snake[i][1];
+    atom.context.drawImage(e, x * width, y * width, 30, width)
+    _results.push(i++);
+    while (i < l - 1) {
       x = this.snake[i][0];
       y = this.snake[i][1];
-      atom.context.fillRect(x * this.pixelsize, y * this.pixelsize, this.pixelsize, this.pixelsize);
+      atom.context.fillRect(x * width, y * width, 30, width);
       _results.push(i++);
     }
     return _results;
@@ -195,7 +202,7 @@ Game = (function(_super) {
     // var messages = ["情感伤害","叶子","声波拖鞋","数学得A-","从床上掉下来","从梯子上掉下来","吃米饭太软","吃米饭太干","睡觉","死亡","失去社会信用","被骗","用刀吃饭","被猪刺穿","水分过多", "吃榴莲","遇见外星人","淹在浴缸里","看到粉红色","打游戏","被FBI枪杀","加入FBI","太幸运","太倒霉"]
 
     _ref = [`Died from ${messages[Math.floor(Math.random()*(messages.length))]}`, this.tx / 2, this.ty / 2.4], mess = _ref[0], x = _ref[1], y = _ref[2];
-    atom.context.font = "bold 30px monospace";
+    atom.context.font = `bold ${this.pixelsize}px monospace`;
     atom.context.textAlign = "center";
     atom.context.fillText(mess, x, y);
     atom.context.strokeText(mess, x, y);
