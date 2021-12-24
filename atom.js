@@ -176,7 +176,7 @@
   
       Game.prototype.draw = function() {};
   
-      Game.prototype.run = function() {
+      Game.prototype.run = function(speed) {
         var s,
           _this = this;
         if (this.running) return;
@@ -184,7 +184,7 @@
         s = function() {
           if (!_this.running) return;
           _this.step();
-          return requestAnimationFrame(s);
+          return setTimeout(() => {requestAnimationFrame(s)}, speed());
         };
         this.last_step = Date.now();
         return requestAnimationFrame(s);

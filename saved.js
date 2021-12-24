@@ -7,7 +7,18 @@ var moosic = new Audio('music.mp3');
 var ding = new Audio('ding.mp3')
 var e = document.createElement('img');
 e.src = "head.png"
-var speed = 300
+var level = prompt("please select your level \neasy medium hard \n(hard level is not so hard)")
+var speed;
+if(level === 'easy') {
+  speed = 300
+} else if(level === 'medium') {
+  speed = 150
+} else if(level === 'hard') {
+  speed = 0
+} else {
+  alert("??? refresh this page and try again. seriously. I will make this game as slow as a snail if u dun do that.")
+  speed = 100000
+}
 function invertColor(hex) {
   if (hex.indexOf('#') === 0) {
       hex = hex.slice(1);
@@ -91,12 +102,10 @@ Game = (function(_super) {
     }
     _ref = [this.width * this.pixelsize, this.height * this.pixelsize], this.tx = _ref[0], this.ty = _ref[1];
     this.genFood();
-
     return this.showIntro();
   };
 
-  Game.prototype.genFood = function(){
-
+  Game.prototype.genFood = function() {
   if(this.music){moosic.play()}
     ding.play()
     var x, y;
@@ -108,57 +117,48 @@ Game = (function(_super) {
       if (!this.testCollision(x, y)) break;
     }
     // black, white, blue, green, yellow, orange, red, purple, brown   
-    // 0, 15, 30, 45, 60, 75, 90, 105, 120
+    // 0, 5, 10, 20, 30, 40, 50, 75, 100
     if(this.score === 0){
       color = "#FFF";
-      console.timeLog()
     } 
-    if(this.score >= 15 && this.score < 30 && color !== "#000" && color !== "#000"){
+    if(this.score >= 5 && this.score < 10 && color !== "#000" && color !== "#000"){
       this.togglePause(true, "This is the alpha stage. Most players go past this boundary. You should too.")
       alert('press ctrl+shift+i (windows) or cmd+opt+i (mac)')
       color = "#000"
-      speed = 300 - 37.5
     }
-    if(this.score >= 30 && this.score < 45 && color !== "#007aff"){
+    if(this.score >= 10 && this.score < 20 && color !== "#007aff"){
       this.togglePause(true, "Well done. Even though you may be colour-blind now, don't give up. You still have a long way to go.")
       color = "#007aff";
-      speed = 300 - 75
     }
-    if(this.score >= 45 && this.score < 60 && color !== "#378805"){
+    if(this.score >= 20 && this.score < 30 && color !== "#378805"){
       this.togglePause(true, `Look, now the snake is green. Try to get past this level. Even though it is easy, you still have ${100 - this.score} points to go before being god mode.`)
       color = "#378805";
-      speed = 300 - 112.5
     }
-    if(this.score >= 60 && this.score < 75 && color !== "#FFFF00"){
+    if(this.score >= 30 && this.score < 40 && color !== "#FFFF00"){
       this.togglePause(true, `The Ikea level! This is scarier than the music. According to a poll, only 6% of Swedish people don't have Ikea furniture so deal with it. `)
 
       color = "#FFFF00";
-      speed = 300 - 150
     }
-    if(this.score >= 75 && this.score < 90 && color !== "#FF5F00"){
+    if(this.score >= 40 && this.score < 50 && color !== "#FF5F00"){
       this.togglePause(true, `Phew. It's done. You only have ${100-this.score} to go. Nice. `)
 
       color = "#FF5F00";
-      speed = 300 - 187.5
     }
-    if(this.score >= 90 && this.score < 105 && color !== "#FF0000"){
+    if(this.score >= 50 && this.score < 75 && color !== "#FF0000"){
       this.togglePause(true, `u HaCKeR???? Ur literally advanced now. Only have ${100-this.score} to go!`)
       e.src = "prohead.png"
       console.log(e.src)
       color = "#FF0000";
-      speed = 300 - 225
     }
-    if(this.score >= 105 && this.score < 120 && color !== "#CC8899"){
+    if(this.score >= 75 && this.score < 100 && color !== "#CC8899"){
       this.togglePause(true, `I hope you are not colour-blind now. Ur Pro now. Almost God!`)
 
       color = "#CC8899";
-      speed = 300 - 262.5
     }
-    if(this.score >= 120 && color !== "#C38452"){
+    if(this.score >= 100 && color !== "#C38452"){
       this.togglePause(true, `Look at you! you are a god now! You now have bragging rights and please recommend this game to others.`)
 
       color = "#C38452";
-      speed = 0
     }
    
     console.log(this.score)
@@ -212,6 +212,7 @@ Game = (function(_super) {
     atom.context.strokeStyle = color;
     var messages = ["EMOTIOnAl dAMage", "leaf", "sonic slipper", "being a disappointment", "getting A- in math", "being bsian", "falling off a bed", "falling off a ladder", "eating rice too soft", "eating rice too dry", "sleeping", "death", "losing social credit", "being rickrolled", "eating with a knife", "being impaled by a pig", "overhydration", "eating durian", "meeting Ling Ling","drowning in a bathtub", "seeing pink", "gaming", "being shot by the FBI", "joining FBI", "being too lucky", "being too unlucky", "swearing"]
     // var messages = ["情感伤害","叶子","声波拖鞋","数学得A-","从床上掉下来","从梯子上掉下来","吃米饭太软","吃米饭太干","睡觉","死亡","失去社会信用","被骗","用刀吃饭","被猪刺穿","水分过多", "吃榴莲","遇见外星人","淹在浴缸里","看到粉红色","打游戏","被FBI枪杀","加入FBI","太幸运","太倒霉"]
+
     _ref = [`Died from ${messages[Math.floor(Math.random()*(messages.length))]}`, this.tx / 2, this.ty / 2.4], mess = _ref[0], x = _ref[1], y = _ref[2];
     atom.context.font = `bold ${this.pixelsize}px monospace`;
     atom.context.textAlign = "center";
