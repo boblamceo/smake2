@@ -7,7 +7,6 @@ var moosic = new Audio('music.mp3');
 var ding = new Audio('ding.mp3')
 var e = document.createElement('img');
 e.src = "head.png"
-var speed = 300
 function invertColor(hex) {
   if (hex.indexOf('#') === 0) {
       hex = hex.slice(1);
@@ -113,52 +112,44 @@ Game = (function(_super) {
       color = "#FFF";
       console.timeLog()
     } 
-    if(this.score >= 15 && this.score < 30 && color !== "#000" && color !== "#000"){
+    if(this.score >= 5 && this.score < 10 && color !== "#000" && color !== "#000"){
       this.togglePause(true, "This is the alpha stage. Most players go past this boundary. You should too.")
       alert('press ctrl+shift+i (windows) or cmd+opt+i (mac)')
       color = "#000"
-      speed = 300 - 37.5
     }
-    if(this.score >= 30 && this.score < 45 && color !== "#007aff"){
+    if(this.score >= 10 && this.score < 20 && color !== "#007aff"){
       this.togglePause(true, "Well done. Even though you may be colour-blind now, don't give up. You still have a long way to go.")
       color = "#007aff";
-      speed = 300 - 75
     }
-    if(this.score >= 45 && this.score < 60 && color !== "#378805"){
+    if(this.score >= 20 && this.score < 30 && color !== "#378805"){
       this.togglePause(true, `Look, now the snake is green. Try to get past this level. Even though it is easy, you still have ${100 - this.score} points to go before being god mode.`)
       color = "#378805";
-      speed = 300 - 112.5
     }
-    if(this.score >= 60 && this.score < 75 && color !== "#FFFF00"){
+    if(this.score >= 30 && this.score < 40 && color !== "#FFFF00"){
       this.togglePause(true, `The Ikea level! This is scarier than the music. According to a poll, only 6% of Swedish people don't have Ikea furniture so deal with it. `)
 
       color = "#FFFF00";
-      speed = 300 - 150
     }
-    if(this.score >= 75 && this.score < 90 && color !== "#FF5F00"){
+    if(this.score >= 40 && this.score < 50 && color !== "#FF5F00"){
       this.togglePause(true, `Phew. It's done. You only have ${100-this.score} to go. Nice. `)
 
       color = "#FF5F00";
-      speed = 300 - 187.5
     }
-    if(this.score >= 90 && this.score < 105 && color !== "#FF0000"){
+    if(this.score >= 50 && this.score < 75 && color !== "#FF0000"){
       this.togglePause(true, `u HaCKeR???? Ur literally advanced now. Only have ${100-this.score} to go!`)
       e.src = "prohead.png"
       console.log(e.src)
       color = "#FF0000";
-      speed = 300 - 225
     }
-    if(this.score >= 105 && this.score < 120 && color !== "#CC8899"){
+    if(this.score >= 75 && this.score < 100 && color !== "#CC8899"){
       this.togglePause(true, `I hope you are not colour-blind now. Ur Pro now. Almost God!`)
 
       color = "#CC8899";
-      speed = 300 - 262.5
     }
-    if(this.score >= 120 && color !== "#C38452"){
+    if(this.score >= 100 && color !== "#C38452"){
       this.togglePause(true, `Look at you! you are a god now! You now have bragging rights and please recommend this game to others.`)
 
       color = "#C38452";
-      speed = 0
     }
    
     console.log(this.score)
@@ -342,4 +333,4 @@ Game = (function(_super) {
 
 game = new Game(15, 20, 30);
 
-game.run(() => speed);
+game.run();
