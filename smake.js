@@ -7,6 +7,14 @@ var moosic = new Audio('music.mp3');
 var ding = new Audio('ding.mp3')
 var e = document.createElement('img');
 e.src = "head.png"
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+}
+function setCookie(cname, cvalue) {
+  document.cookie = cname + "=" + cvalue + ";" + ";path=/";
+}
 function invertColor(hex) {
   if (hex.indexOf('#') === 0) {
       hex = hex.slice(1);
@@ -95,7 +103,11 @@ Game = (function(_super) {
   };
 
   Game.prototype.genFood = function(){
-
+    if(!getCookie('score') || this.score > Number(getCookie('score'))){
+      setCookie('score', this.score)
+    }
+    document.getElementById("score").innerHTML = this.score;
+    document.getElementById("high").innerHTML = getCookie('score');
   if(this.music){moosic.play()}
     ding.play()
     var x, y;
@@ -107,7 +119,6 @@ Game = (function(_super) {
       if (!this.testCollision(x, y)) break;
     }
     // black, white, blue, green, yellow, orange, red, purple, brown   
-    // 0, 15, 30, 45, 60, 75, 90, 105, 120
     if(this.score === 0){
       color = "#FFF";
       console.timeLog()
@@ -152,7 +163,6 @@ Game = (function(_super) {
       color = "#C38452";
     }
    
-    console.log(this.score)
     return this.food = [x, y];
   };
 
@@ -331,6 +341,6 @@ Game = (function(_super) {
 
 })(atom.Game);
 
-game = new Game(15, 20, 30);
+game = new Game(17, 22, 30);
 
 game.run();

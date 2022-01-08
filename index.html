@@ -5,9 +5,12 @@
   <title>Smaκe</title>
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
   <style type="text/css">
-    
+    @import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro&display=swap');
     body {
       background-color:black;
+      color: white;
+      font-size: 3vh;
+      font-family: Anonymous Pro;
     }
     #canvas_container {
       margin: 25px auto;
@@ -16,6 +19,8 @@
   </style>
 </head>
 <body>
+  <div>score: <span id="score"></span></div>
+  <div>high score: <span id="high"></span></div>
   <div id="canvas_container"><canvas></canvas></div>
   
   <script src="atom.js" type='text/javascript'></script>
